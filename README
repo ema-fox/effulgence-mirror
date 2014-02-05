@@ -1,13 +1,16 @@
 # effulgence
 
-FIXME: write description
+This is an automatic mirror generator for the RP fic "Effulgence". It is written in Clojure and compiled using Lein.
+At present, it is quite buggy.
 
 ## Usage
 
-FIXME: write
+Currently you have to use the REPL and do something like 
+(spit TOC.html (apply str (html/emit* (html/select TOCWithUpdatedTags [:div.entry-content])))) and
+(dorun (map processChapterURL RemainingTOCURLList)) in order to get it to work.
 
 ## License
 
-Copyright (C) 2014 FIXME
+Copyright (C) 2014 Liam Dalton
 
 Distributed under the Eclipse Public License, the same as Clojure.
