@@ -95,11 +95,8 @@
 		(getUserURL url1) 
 		"-" 
 		(getNumberURL url1)
-		(if 
-			(nil? (getThreadURL url1)) 
-			"" 
-			(str "-" (getThreadURL url1))
-		)
+                (if-let [thread-url (getThreadURL url1)]
+                  (str "-" thread-url))
 		".html"
 	)
 )
@@ -158,11 +155,8 @@
 		".dreamwidth.org/"
 		(getNumberURL url1)
 		".html?style=site"
-		(if
-			(nil? (getThreadURL url1))
-			""
-			(str "&thread=" (getThreadURL url1))
-		)
+                (if-let [thread-url (getThreadURL url1)]
+                  (str "&thread=" thread-url))
 	)
 )
 
