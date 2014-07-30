@@ -432,19 +432,15 @@
 )
 
 (defn getCommentsFromPotentiallyThreadedChapter [url1]
-	(
-		(fn [listOfCommentIDs mapOfComments]
+  (let [listOfCommentIDs (getAllCommentIDsFromChapter url1)
+        mapOfComments (extractAllCommentsFromChapter url1)]
 			(filter
 				(fn [map1]
 					(in? listOfCommentIDs (:id (:attrs map1)))
 				)
 				mapOfComments
 			)
-		)
-		(getAllCommentIDsFromChapter url1)
-		(extractAllCommentsFromChapter url1)
-	)
-)
+  ))
 
 (defn emitNewHTMLForChapter [url1]
 	(str
