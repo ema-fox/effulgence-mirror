@@ -251,19 +251,10 @@
 )
 
 (defn downloadUserPicUsingMap [map1]
-	(if
-		(hasUserPicInMap map1)
-		(if 
-			(doesUserPicExistFromMap map1)
-			nil
-			(copyURIToFile 
-				(getUserPicSrcFromMap map1)
-				(str chapterDir "/" (getUserPicFilePathFromMap map1))
-			)
-		)
-		nil
-	)
-)
+  (if (and (hasUserPicInMap map1)
+           (not (doesUserPicExistFromMap map1)))
+    (copyURIToFile (getUserPicSrcFromMap map1)
+                   (str chapterDir "/" (getUserPicFilePathFromMap map1)))))
 
 (defn getAuthorNameFromMap [map1]
 	(:lj:user 
