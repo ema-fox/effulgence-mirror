@@ -59,18 +59,8 @@
 	(clojure.walk/keywordize-keys 
 		(apply 
 			hash-map 
-			(
-				(fn [queryResult] 
-					(if 
-						(nil? queryResult) 
-						[] 
-						(clojure.string/split queryResult #"(&|=)")
-					)
-				) 
-				(.getQuery 
-					(java.net.URI. url1)
-				)
-			)
+                        (if-let [queryResult (.getQuery (java.net.URI. url1))]
+                          (clojure.string/split queryResult #"(&|=)"))
 		)
 	)
 )
@@ -169,23 +159,8 @@
 )
 
 (defn determinePageCount [url1]
-	(
-		(fn [mystr] 
-			(if 
-				(nil? mystr) 
-				1 
-				(Integer. 
-					(nth 
-						(clojure.string/split 
-							mystr 
-							#" "
-						) 
-						3
-					)
-				)
-			)
-		)
-		(first 
+  (if-let [mystr
+                (first
 			(:content 
 				(first 
 					(html/select 
@@ -196,9 +171,11 @@
 					)
 				)
 			)
-		) 
-	)
-)
+		)
+          ]
+    (Integer. (nth (clojure.string/split mystr #" ")
+                   3))
+    1))
 
 (defn getCommentIDFromMap [map1]
 	(:id
