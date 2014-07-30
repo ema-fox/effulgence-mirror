@@ -458,9 +458,7 @@
 )
 
 (defn processChapterURL [url1]
-	(do
 		(downloadHeaderImageFromChapter url1)
 		(dorun (map downloadUserPicUsingMap (getCommentsFromPotentiallyThreadedChapter url1)))
 		(spit (newPagePath url1) (emitNewHTMLForChapter url1)) 
-	)
 )
