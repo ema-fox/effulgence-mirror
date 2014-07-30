@@ -414,22 +414,9 @@
 		Gets all of the comments from the chapter in a hashmap.
 		Ignores threading information!
 	"
-	(apply 
-		concat
-		(map 
-			(fn [num1] 
-				(extractCommentsFromSinglePage url1 num1)
-			) 
-			(map 
-				inc 
-				(range 
-					0 
-					(determinePageCount url1)
-				)
-			)
-		)
-	)
-)
+        (mapcat (fn [num1]
+                  (extractCommentsFromSinglePage url1 (inc num1)))
+                (range (determinePageCount url1))))
 
 (defn getCommentsFromPotentiallyThreadedChapter [url1]
   (let [listOfCommentIDs (getAllCommentIDsFromChapter url1)
