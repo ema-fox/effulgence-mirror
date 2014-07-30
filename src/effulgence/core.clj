@@ -237,10 +237,7 @@
 	"
 	Given a comment map, returns the appropriate file name for the user pic.
 	"
-	(reduce
-		(fn [strfrag1 strfrag2]
-			(str strfrag1 "-" strfrag2)
-		)
+        (clojure.string/join "-"
 		(rest 
 			(clojure.string/split 
 				(.getPath 
